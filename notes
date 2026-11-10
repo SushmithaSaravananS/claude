@@ -1,0 +1,208 @@
+Claude Certified Developer – Foundations
+The Claude Certified Developer – Foundations certification validates that an individual can build, integrate, and ship production-grade applications, agents, and workflows on the Claude platform. It covers the Claude API and client SDKs, the Claude Agent SDK, Claude Code, prompt and context engineering, evaluation and debugging, model selection and cost management, security, and tool and MCP development.
+Exam facts
+Item	Detail
+Exam code	CCDV-F
+Questions	53 multiple-choice and multiple-response items
+Time limit	120 minutes, with about 135 minutes of total seat time
+Delivery	Pearson VUE, online proctored or at a test center
+Passing score	720 on a scaled range of 100 to 1,000
+Fee	125 USD, before any partner-tier discount
+Validity	12 months from the date you earn it
+Prerequisites	None. No course is required
+Language	English
+
+
+Audience
+The certification is intended for technical professionals who build and ship LLM-based systems: AI and machine learning engineers, technical leads, and senior software engineers working between business requirements and implementation. It is not intended for non-technical users, for people without hands-on software development experience, or for roles limited to prompt writing alone.
+
+
+
+Skills measured
+#	Domain	Weight
+1	Agents and Workflows	14.7%
+2	Applications and Integration	33.1%
+3	Claude Code	3.1%
+4	Eval, Testing, and Debugging	2.6%
+5	Model Selection and Optimization	16.8%
+6	Prompt and Context Engineering	11.0%
+7	Security and Safety	8.1%
+8	Tools and MCPs	10.6%
+
+
+
+Domain 1: Agents and Workflows (14.7%)
+
+Agent architecture (4.5%): workflow versus agent decision criteria, manager and supervisor hierarchies, the role of subagents
+Agent construction (5.3%): the Claude Agent SDK, custom agent loops and harnesses, self-hosted versus Anthropic-hosted managed agents, hooks for deterministic actions
+Agent patterns and frameworks (4.9%): tool-use loops, subagents, memory, context-window management, and abstraction frameworks such as Strands, LangGraph, and PydanticAI
+Domain 2: Applications and Integration (33.1%)
+
+Understanding requirements (3.4%) and systems life cycle management (2.8%)
+Claude API mechanics (6.8%): messages, tools, streaming, vision, thinking, caching, third-party vendors, batch versus realtime selection
+Software engineering foundations (7.4%): REST, JSON, asynchronous programming, version control, code review, refactoring
+Claude application design (8.6%): how Claude interprets instructions across Claude Code, Desktop, claude.ai, the API, and SDKs; content boundaries; schema design; session hygiene; plugin management
+Configuration management (4.1%): CLAUDE.md files, settings.json, model version pinning, prompt versioning, plugin dependencies
+Domain 3: Claude Code (3.1%)
+
+Core components (Rules, Skills, Commands, Agents, Agent Memory), session management, slash commands, headless and streaming modes, the CLAUDE.md hierarchy, and settings.json
+Domain 4: Eval, Testing, and Debugging (2.6%)
+
+Error type identification, recovery strategies, trace analysis, and isolating problems between the integration layer and model output
+Domain 5: Model Selection and Optimization (16.8%)
+
+LLM fundamentals (5.2%): tokens, context windows, sampling, non-determinism, fast mode, extended and adaptive thinking, effort levels, zero-shot to multi-shot prompting
+Technical fundamentals (6.1%): SDKs wrapping REST APIs, websockets
+Model selection and tradeoffs (2.7%): Opus, Sonnet, and Haiku use cases; quality, latency, and cost; breaking behavior changes across releases
+Cost and token management (2.8%): usage tracking, cost modeling, prompt caching and cache checkpointing
+Domain 6: Prompt and Context Engineering (11.0%)
+
+Context engineering (3.8%): context-window management, preventing drift and bloat, tool output pruning, compaction, context isolation through subagents
+Prompt engineering (4.6%): instruction clarity, few-shot examples, system versus user placement, output constraints, iterative refinement, input sanitization
+Output handling (2.6%): structured output patterns, response validation, defensive parsing, skepticism toward confident output
+Domain 7: Security and Safety (8.1%)
+
+AI application security (3.2%): prompt injection mitigation, jailbreak defense, untrusted input handling, data leakage prevention, PII handling
+Guardrails and safe deployment (2.3%): content policy, guardrail layering, least privilege, identity and access management
+Claude hooks for guardrails (1.0%) and identity, secrets, and key management (1.6%)
+Domain 8: Tools and MCPs (10.6%)
+
+Tool implementation (4.4%): function calling, tool description writing, error handling, client-side versus server-side tools, approval patterns
+MCP server development (2.1%): authoring, deployment, resources, tools, prompts, stdio and socket transports
+Agentic customization (4.1%): tradeoffs among built-in tools, custom tools, Skills, and MCPs
+
+
+---
+
+Cheat sheet: Developer – Foundations
+Everything worth holding in your head the hour before the exam, on one page. Facts come from the official exam guide; the rules of thumb are the maintainer's, distilled from the official rationales.
+
+Where the marks are
+Applications and Integration        33.1%  ████████████████████████████████
+Model Selection and Optimization    16.8%  ████████████████
+Agents and Workflows                14.7%  ██████████████
+Prompt and Context Engineering      11.0%  ███████████
+Tools and MCPs                      10.6%  ██████████
+Security and Safety                  8.1%  ████████
+Claude Code                          3.1%  ███
+Eval, Testing, and Debugging         2.6%  ██
+One domain is a third of the paper. Claude Code and Eval together are under 6%, so do not over-prepare them because they feel familiar.
+
+If you remember nothing else
+stop_reason drives the loop. tool_use means execute the tool, append the result, call again. end_turn means done.
+Batches for latency-tolerant volume. 50% of the cost, 24-hour window, custom_id correlation, no multi-turn tool calling inside a batch.
+Cache the stable prefix. Static system prompt and policy first, variable content last, caching on. Cuts latency and cost together.
+Enforce structure, then validate, then retry with the error. Tool use plus JSON schema. Never trust the model to emit valid JSON because you asked firmly.
+Known path, workflow. Unknown path, agent. Autonomy earns its complexity only when the model must choose the route.
+Subagents isolate context. Delegation keeps verbose intermediate work out of the parent window.
+Pin model versions in production. Upgrades then become evaluated changes rather than overnight surprises.
+Injection is defeated structurally. Separate untrusted content from instructions and deny it access to consequential tools. Not by asking the model to ignore it, not by a bigger model.
+Least privilege on tools. A capability the agent does not hold cannot be misused. Removal beats confirmation dialogs and logging.
+MCP server for reuse across applications. Custom tool for one app, Skill for instructions, built-ins for file and shell basics.
+Tool descriptions are the selection mechanism. Overlapping, vague descriptions cause wrong tool choices. Differentiate or consolidate.
+Context hygiene beats a bigger window. Prune tool output, compact history, isolate subtasks. A larger window delays the same failure at higher cost.
+Few-shot fixes format and edge cases. More instructions do not.
+Traces localize the fault. Correct reasoning over wrong documents is a retrieval defect, not a model defect.
+Decisions the exam keeps testing
+Requirement	Answer
+Cheap bulk work, results tomorrow	Message Batches API
+Same long preamble every call	Reorder for a stable prefix, enable caching
+Output must be machine-parseable	Tool use with JSON schema plus validation retry
+Capability shared by several apps	MCP server
+Agent must never do X	Do not give it the tool
+Fixed five-step process	Workflow, model used inside it
+Long session degrading	Prune, compact, delegate
+Working the clock
+53 items in 120 minutes is a comfortable pace, slightly over two minutes each. My approach:
+
+First pass, about 65 minutes. Answer what you know. Code-shaped questions read slowly; do not let one long snippet eat five minutes. Flag and move.
+Second pass, about 35 minutes. Work the flags. API mechanics questions in particular tend to resolve once you have seen several: the exam is internally consistent about what it considers good practice.
+Last 20 minutes. Re-read every multiple-response item and confirm the number of selections.
+Reading a question the way it is written
+Each scenario states a constraint: cost, latency, reliability, security, or maintainability. Identify it in the first sentence, then eliminate. The pattern across almost every item is the same: the correct option changes the structure of the system, and the distractors adjust a parameter, add a bigger model, or ask the model nicely.
+
+Specifically, be suspicious of any option containing "increase max_tokens", "raise temperature", "use a larger model", or "add an instruction to the prompt" when the problem is correctness, cost, format, or security. Those are the exam's standard wrong answers.
+
+The morning of
+Run the system test again on the exam machine, even if it passed last week
+Close everything on the shutdown list before check-in, including the Claude desktop app
+ID ready, room clear, desk clear, second monitor unplugged
+Check-in takes longer than you expect; start early
+135 minutes of seat time; eat first
+If you blank
+Skip and keep moving. One hard item costs one mark; stalling costs several. On this exam in particular, later items often jog the concept you needed for an earlier one.
+
+Exam day logistics
+ID name must match your registration exactly
+Closed book. No notes, no documentation, no translation tools
+Answer everything; unanswered scores zero
+Multiple response items say how many to pick
+Roughly 2 minutes per item; flag and return rather than stalling
+Traps
+The most capable model is rarely the right answer to a cost or latency question
+Temperature is almost never the fix for a correctness, format, or security problem
+Try or catch that silently swallows failures is never the sturdy pattern
+Prompt wording is not a security control, and confirmation dialogs are not least privilege
+
+
+----
+Study notes: Developer – Foundations
+My working notes from preparing for this exam, organized by what the published skill weights say deserves attention. They condense what matters; they do not replace the exam guide, and nothing here comes from the live exam, which is covered by a non-disclosure agreement.
+
+The weight math that should drive your time: Applications and Integration (33.1%) plus Model Selection and Optimization (16.8%) plus Agents and Workflows (14.7%) is nearly two thirds of the exam. Claude Code (3.1%) and Eval, Testing, and Debugging (2.6%) together are barely three questions' worth.
+
+API mechanics (the core 6.8% plus everything it touches)
+Messages API: conversation state lives client side; you send the full message history each call. System prompts set persistent behavior; user and assistant turns carry the dialogue.
+Where the conversation lives. There is no session on the server. You hold the history and resend it, which is why a long conversation costs more per turn than a short one.
+
+
+stop_reason is the control signal: end_turn means done, tool_use means execute the requested tool and return the result in a new user turn. An agent loop is exactly this cycle.
+The tool loop. This cycle is the whole of agentic behavior on the API. stop_reason drives it, and an agent is this loop repeated until end_turn.
+
+
+Two things the diagram makes obvious that the prose does not. You execute the tool, not Claude. And the result goes back as a user turn, which is why the history grows on every pass.
+
+Streaming cuts perceived latency, not cost. Vision and multi-format input arrive as content blocks.
+Message Batches API: for latency-tolerant bulk work. 50% of the cost, results within a 24-hour window, correlate with custom_id, no multi-turn tool calling. The batch-versus-realtime tradeoff is a favorite scenario shape: overnight and cost-sensitive means batch.
+Batch or real time. This is a scenario shape that recurs, and it turns on one question rather than on cost.
+
+
+Cost is the consequence, not the criterion. Ask who is waiting first.
+
+Prompt caching: put stable content (system prompt, policies, examples) first, variable content last, so the prefix is reusable. Caching cuts both latency and cost; reordering the prompt is often the whole fix.
+Why the order decides the saving. The cache matches a prefix. Anything variable placed early breaks the match for everything after it, so the same content in the wrong order caches nothing.
+
+
+In the second arrangement the prefix changes on every request, so nothing after it can be reused. Reordering is often the entire optimization.
+
+Model selection and cost (16.8%)
+Haiku for high-volume simple work, Sonnet as the default, Opus when reasoning depth pays for itself. Extended and adaptive thinking and effort levels trade latency for quality on hard problems.
+Tokens are the unit of everything: budget them, track usage, and know that context windows bound the conversation plus the response.
+Model releases can change behavior. Pin model versions in production and treat upgrades as changes requiring evaluation, not drop-ins.
+Agents and workflows (14.7%)
+Workflow versus agent: if the steps are known in advance, orchestrate a workflow; reserve an autonomous agent loop for tasks where the model must decide the path. The cheapest reliable structure wins.
+Manager and supervisor hierarchies delegate to subagents; subagents also isolate context so a long investigation does not pollute the main thread.
+Hooks give deterministic control at loop boundaries, which is how you enforce guardrails an LLM cannot be trusted to self-enforce.
+Know what the Claude Agent SDK gives you versus a hand-rolled loop versus frameworks such as LangGraph, Strands, or PydanticAI: the tradeoff is control against convention.
+Tools, Skills, and MCP (10.6%)
+The decision table I kept coming back to:
+
+Need	Reach for
+Capability inside one application	A custom tool with a clear schema
+Reusable capability across applications, maintained independently	An MCP server
+Reusable instructions and conventions, not code	A Skill
+File, shell, and search basics	The built-in tools
+Tool descriptions are prompts: the model chooses tools by reading them, so similar tools need clearly differentiated descriptions.
+Client-side versus server-side execution and approval patterns for dangerous operations are in scope.
+Prompt, context, and output (11.0% + 2.6%)
+System prompt for durable behavior, user turn for the task. Few-shot examples fix format and edge-case behavior better than more instructions.
+Context drift and bloat are managed by pruning tool outputs, compacting history, and isolating subtasks in subagents.
+Treat model output as untrusted input to your own system: validate structured output against a schema, parse defensively, and retry with the validation error fed back.
+Security (8.1%)
+The exam's model answer for prompt injection, worth memorizing as a pattern: treat retrieved or user-supplied content as untrusted data, keep it separated from trusted instructions, and enforce least privilege with guardrails or hooks so injected text cannot trigger sensitive actions. Bigger models, higher temperature, or polite requests in the system prompt are all wrong answers. Secrets live in managed stores, never in prompts or code; PII gets minimized before it reaches the model.
+
+
+
+
+
+
